@@ -1,19 +1,34 @@
 import os
 from call_weather import fetch_weather_data
+from call_ai_analysis import ai_analysis
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# set configs
-stormglass_auth = os.getenv("STORMGLASS_KEY")
+def main():
 
-if not stormglass_auth:
-    raise ValueError("Chave de API STORMGLASS_KEY não encontrada no .env")
+    # set configs
+    stormglass_auth = os.getenv("STORMGLASS_KEY")
+    if not stormglass_auth:
+        raise ValueError("Stormglass API Key not found")
 
-floripa_latitude = -27.5954
-floripa_longitude = -48.5480
+    openai_key = os.getenv("OPEN_AI")
+    if not openai_key:
+        raise ValueError("Open AI API Key not found")
 
-# 1. call wheater API function
-stormglass_response = fetch_weather_data(floripa_latitude, floripa_longitude, stormglass_auth)
-print(stormglass_response)
+    surf_spot = "Florianópolis, SC - Brasil"
+    floripa_latitude = -27.593500
+    floripa_longitude = -48.558540
 
+
+    # 1. call wheater API function
+    print("Collecting forecast data...")
+    stormglass_response = fetch_weather_data(floripa_latitude, floripa_longitude, stormglass_auth)
+
+    # 2.call AI analysis over JSON response
+    print("AI analysis starting...")
+    ai_response = ai_analysis(openai_key, stormglass_response, surf_spot)
+    print(ai_response)
+
+if __name__ == "__main__":
+    main()
