@@ -2,6 +2,7 @@ import os
 import markdown
 from call_weather import fetch_weather_data
 from call_ai_analysis import ai_analysis
+from call_mailchimp import main_campaign_function
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,13 +30,21 @@ def main():
     # 2. call AI analysis over JSON response
     print("AI analysis starting...")
     ai_response = ai_analysis(openai_key, stormglass_response, surf_spot)
-    print(ai_response)
 
     # 3. convert markdown to html
     print("Converting AI output to HTML")
     html = markdown.markdown(ai_response)
-    with open('result.html', 'w', encoding="utf-8") as output_file:
-        output_file.write(html)
+    # with open('result.html', 'w', encoding="utf-8") as output_file:
+    #     output_file.write(html)
+
+    # 4. adicionar estilo ao HTML via template
+    print("Setting CSS to HTML")
+    with open("template.html", "r", encoding="utf-8") as tpl:
+        template = tpl.read()
+        final_html = template.replace("{{content}}", html)
+    
+    # 5. Enviar campanha
+    main_campaign_function(final_html)
 
 if __name__ == "__main__":
     main()

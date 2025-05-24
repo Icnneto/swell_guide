@@ -23,7 +23,9 @@ Esses textos serão utilizados em uma newsletter diária voltada a surfistas e e
 ```markdown
 ## Previsão de Ventos e Ondas
 
-**Período analisado:** 13 de maio
+**Local:** {Coloque o Local da Previsão}
+**Data:** {Coloque a data da previsão}
+**Período analisado:** {Coloque o período do dia analisado}
 
 ### Vento
 - Direção predominante: Nordeste (NE)
