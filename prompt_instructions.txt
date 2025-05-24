@@ -21,7 +21,7 @@ Esses textos serão utilizados em uma newsletter diária voltada a surfistas e e
 # Exemplo de estrutura esperada da resposta (em Markdown)
 
 ```markdown
-## 🌊 Resumo da Previsão
+## Previsão de Ventos e Ondas
 
 **Período analisado:** 13 de maio
 

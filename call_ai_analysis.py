@@ -3,7 +3,7 @@ from openai import OpenAI
 def ai_analysis (api_key:str, forecast:object, spot:str) -> str:
     client = OpenAI(api_key=api_key)
 
-    with open("prompt.txt", "r", encoding="utf-8") as f:
+    with open("prompt_instructions.txt", "r", encoding="utf-8") as f:
         instructions = f.read()
 
     try:
