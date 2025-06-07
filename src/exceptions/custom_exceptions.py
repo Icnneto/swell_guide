@@ -10,3 +10,11 @@ class LLMServiceError(Exception):
 class LLMAPIError(Exception):
     """Exception thrown when there is an error in the LLM API."""
     pass
+
+class MailchimpServiceError(Exception):
+    """General errors on Mailchimp services."""
+    pass
+
+class MailchimpAPIError(Exception):
+    """Exception thrown when there is an error in the Mailchimp API."""
+    pass

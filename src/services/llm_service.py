@@ -1,13 +1,16 @@
 from typing import Dict, Any, Optional
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from src.exceptions.custom_exceptions import LLMAPIError, LLMServiceError
+from src.exceptions.custom_exceptions import ( 
+    LLMAPIError, 
+    LLMServiceError
+)
 
 class LLMService:
 
     def __init__ (self, 
                   model: str = 'gpt-4', 
-                  temperature: float = 0.2
+                  temperature: float = 0.3
                 ):
         
         """

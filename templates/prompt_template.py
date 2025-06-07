@@ -31,7 +31,11 @@ Os dados da previsão em JSON são: {forecast_json}
 ## Previsão de Ventos e Ondas
 
 **Local:** {{Coloque o Local da Previsão}}
+
+
 **Data:** {{Coloque a data da previsão}}
+
+
 **Período analisado:** {{Coloque o período do dia analisado}}
 
 ### Vento
