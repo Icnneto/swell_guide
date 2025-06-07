@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swell Guide - Previsão</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #FAFAFA;
+            color: #595959;
+            line-height: 1.6;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            padding: 0;
+            vertical-align: top;
+        }
+
+        div {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        header {
+            color: #042940;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        header .logo {
+            display: flexbox;
+            text-align: center;
+        }
+
+        header .logo img {
+            height: 5rem;
+            width: auto;
+            
+        }
+
+        /* header h1 {
+            margin: 0 0 8px 0;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #042940;
+        } */
+
+        header p {
+            margin: 0;
+            font-size: 16px;
+            text-align: center;
+            opacity: 0.9;
+            font-weight: 300;
+            color: #042940;
+        }
+
+        main {
+            padding: 40px 30px;
+        }
+
+        h2 {
+            color: #011826;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            text-align: left;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(89, 89, 89, 0.2);
+        }
+
+        h3 {
+            color: #011826;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 30px 0 15px 0;
+            position: relative;
+            padding-bottom: 4px;
+            text-align: left;
+        }
+
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: #3E6E8C;
+        }
+
+        p {
+            color: #595959;
+            margin: 0 0 16px 0;
+            font-size: 15px;
+            font-weight: 400;
+            text-align: justify;
+        }
+
+        strong {
+            color: #011826;
+            font-weight: 700;
+        }
+
+        ul {
+            margin: 0 0 20px 0;
+            padding: 0 0 0 20px;
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            margin-bottom: 16px;
+            padding: 0 0 0 24px;
+            font-size: 15px;
+            color: #595959;
+            text-align: justify;
+        }
+
+        li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #3E6E8C;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #595959 20%, #595959 50%, #595959 80%, transparent 100%);
+            margin: 30px 0;
+        }
+
+        blockquote {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: none;
+            border-left: 4px solid #3E6E8C;
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        blockquote::before {
+            content: "💡";
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background-color: #042940;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        blockquote p {
+            margin: 0;
+            color: #011826;
+            font-weight: 600;
+            font-style: italic;
+            text-align: justify;
+        }
+
+        footer {
+            background-color: #f8fafc;
+            padding: 30px;
+            text-align: left;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        footer strong {
+            color: #042940;
+            font-weight: 700;
+        }
+
+        em {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* Responsivo para email */
+        @media only screen and (max-width: 600px) {
+            div {
+                border-radius: 0;
+                margin: 0;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            main {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            li {
+                padding: 14px 16px;
+            }
+
+            footer {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                <div>
+                    <header>
+                        <div class="logo">
+                            <img src="Frame 1.svg" alt="Swell Guide Logo" />
+                        </div>
+                        <p>Resumo inteligente e diário da previsão de surf</p>
+                    </header>
+                    <main>
+                       {{content}}
+                    </main>
+                    <footer>
+                        Enviado por <strong>Swell Guide</strong> • Florianópolis, SC<br />
+                        <em>Boas ondas e bons ventos!</em>
+                    </footer>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
