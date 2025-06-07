@@ -1,53 +1,47 @@
-import os
+from pathlib import Path
+from typing import List, Dict
+
 from src.services.llm_service import LLMService
 from src.services.weather_service import WeatherService
 from src.services.mailing_service import MailchimpService
-from src.utils.markdown_to_html_service import markdown_to_html
-from src.utils.html_to_template import insert_html_template
-from dotenv import load_dotenv
-from pathlib import Path
-from premailer import transform
 
-load_dotenv()
+from src.utils.helpers import ( get_env_variable, generate_forecast_report_for_spot, load_spots_from_json )
 
-STORMGLASS_API_KEY = os.getenv('STORMGLASS_API_KEY')
-if not STORMGLASS_API_KEY:
-    raise ValueError('Stormglass API Key not found')
 
-MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
-if not MAILCHIMP_API_KEY:
-    raise ValueError('Mailchim API Key not found')
+def main():
+    try:
+        # Carregar variáveis
+        stormglass_key = get_env_variable('STORMGLASS_API_KEY')
+        mailchimp_key = get_env_variable('MAILCHIMP_API_KEY')
+        mailchimp_public_id = get_env_variable('MAILCHIMP_PUBLIC_ID')
+        server_prefix = 'us9'  # poderá vir de env futuramente
+        template_path = Path("templates/email_template.html")
 
-MAILCHIMP_PUBLIC_ID = os.getenv('MAILCHIMP_PUBLIC_ID')
-if not MAILCHIMP_PUBLIC_ID:
-    raise ValueError('Mailchim public id not found')
+        # Instanciar serviços
+        weather_service = WeatherService(stormglass_key)
+        llm_service = LLMService()
+        mail_service = MailchimpService(mailchimp_key, server_prefix, mailchimp_public_id)
 
-SERVER_PREFIX = 'us9'
+        # Lista de locais (fácil de expandir)
+        database_path = Path("database/surf_spots.json")
+        surf_spots = load_spots_from_json(database_path)
 
-PATH_TO_TEMPLATE = Path("templates") / "email_template.html"
+        for spot in surf_spots:
+            final_html = generate_forecast_report_for_spot(
+                spot_name=spot["name"],
+                latitude=spot["lat"],
+                longitude=spot["lon"],
+                template_path=template_path,
+                llm_service=llm_service,
+                weather_service=weather_service
+            )
 
-surf_spot = "Florianópolis, SC - Brasil"
-floripa_latitude = -27.593500
-floripa_longitude = -48.558540
+            mail_service.create_and_send_campaign(final_html)
 
-# weather_service retorna dict da API
-weather_service = WeatherService(STORMGLASS_API_KEY)
-print('Resgatando dados meteorológicos...')
-weather_data = weather_service.fetch_weather_data(floripa_latitude, floripa_longitude)
+    except Exception as e:
+        # Ideal: logar erro em arquivo ou sistema de monitoramento
+        print(f"[ERROR] Unexpected failure: {e}")
 
-# llm_service recebe dict e retorna markdown
-llm_service = LLMService()
-print('Chamando análise da LLM...')
-llm_response = llm_service.call_ai_analysis(weather_data, surf_spot)
 
-# transformar markdown em html
-html_output = markdown_to_html(llm_response)
-
-# inserir html no template de e-mail
-embedded_html = insert_html_template(PATH_TO_TEMPLATE, html_output)
-
-final_html = transform(embedded_html)
-
-mailing_service = MailchimpService(MAILCHIMP_API_KEY, SERVER_PREFIX, MAILCHIMP_PUBLIC_ID)
-
-send_campaign = mailing_service.create_and_send_campaign(final_html)
+if __name__ == "__main__":
+    main()
