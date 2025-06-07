@@ -1,11 +1,7 @@
 import os
-import markdown
-from call_ai_analysis import ai_analysis
-from call_mailchimp import main_campaign_function
-
-import json
 from src.services.llm_service import LLMService
 from src.services.weather_service import WeatherService
+from src.utils.markdown_to_html_service import markdown_to_html
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -66,12 +62,12 @@ floripa_longitude = -48.558540
 weather_service = WeatherService(STORMGLASS_API_KEY)
 print('Resgatando dados meteorológicos...')
 weather_data = weather_service.fetch_weather_data(floripa_latitude, floripa_longitude)
-print('Previsão:')
-print(weather_data)
 
 # llm_service recebe dict e retorna markdown
 llm_service = LLMService()
 print('Chamando análise da LLM...')
 llm_response = llm_service.call_ai_analysis(weather_data, surf_spot)
-print('Resposta da IA:')
-print(llm_response)
+print('Gerando resposta da IA:')
+
+# transformar markdown em html
+html_output = markdown_to_html(llm_response)
