@@ -39,7 +39,7 @@ def main():
 
     # 4. adicionar estilo ao HTML via template
     print("Setting CSS to HTML")
-    with open("template_v3.html", "r", encoding="utf-8") as tpl:
+    with open("email_template.html", "r", encoding="utf-8") as tpl:
         template = tpl.read()
         final_html = template.replace("{{content}}", html)
     
