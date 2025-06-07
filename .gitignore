@@ -4,3 +4,5 @@ response.json
 /__pycache__
 /.venv
 result.html
+json_test.json
+llm_output_test.md
