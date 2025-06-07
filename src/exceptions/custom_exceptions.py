@@ -18,3 +18,11 @@ class MailchimpServiceError(Exception):
 class MailchimpAPIError(Exception):
     """Exception thrown when there is an error in the Mailchimp API."""
     pass
+
+class MissingEnvVarError(Exception):
+    """Raised when an expected environment variable is missing."""
+    pass
+
+class ProcessingError(Exception):
+    """Raised during the generation of the surf report or email."""
+    pass
