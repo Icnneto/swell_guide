@@ -17,6 +17,7 @@ Esses textos serão utilizados em uma newsletter diária voltada a surfistas e e
 * Sempre destaque se há **alertas importantes**, como ventos muito fortes, mar grosso, risco para banhistas ou boas condições para o surf.
 * Se possível, inclua sugestões amigáveis, como “ideal para surfistas experientes” ou “bom momento para observar o mar”.
 * Nunca invente dados que não estão no JSON.
+* Indique, com base nas condições de vento e ondulação, qual o melhor período para praticar o surf
 * Sempre responda em português do Brasil, a menos que indicado o contrário.
 * Não exagere no uso de emojis ou ícones
 

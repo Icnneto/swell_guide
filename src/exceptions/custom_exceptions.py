@@ -6,7 +6,6 @@ class LLMServiceError(Exception):
     """Exception thrown when there is an error in the LLM service."""
     pass
 
-
 class LLMAPIError(Exception):
     """Exception thrown when there is an error in the LLM API."""
     pass
@@ -24,5 +23,9 @@ class MissingEnvVarError(Exception):
     pass
 
 class ProcessingError(Exception):
+    """Raised during the generation of the surf report or email."""
+    pass
+
+class FileNotFoundError(Exception):
     """Raised during the generation of the surf report or email."""
     pass

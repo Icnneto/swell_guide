@@ -1,47 +1,59 @@
-from pathlib import Path
-from typing import List, Dict
+import json
+from langchain_openai import ChatOpenAI
 
-from src.services.llm_service import LLMService
+# Importações refatoradas
+from src.config import settings
+from src.llm.llm_service import LLMService
+from src.llm.prompt_manager import PromptManager
 from src.services.weather_service import WeatherService
 from src.services.mailing_service import MailchimpService
-
-from src.utils.helpers import ( get_env_variable, generate_forecast_report_for_spot, load_spots_from_json )
-
+from src.use_cases.report_generator import ReportGenerator
+from templates.prompt_template import template_str # Importa a string diretamente
 
 def main():
     try:
-        # Carregar variáveis
-        stormglass_key = get_env_variable('STORMGLASS_API_KEY')
-        mailchimp_key = get_env_variable('MAILCHIMP_API_KEY')
-        mailchimp_public_id = get_env_variable('MAILCHIMP_PUBLIC_ID')
-        server_prefix = 'us9'  # poderá vir de env futuramente
-        template_path = Path("templates/email_template.html")
+        # 1. Construção das Dependências (usando o módulo de config)
+        llm_client = ChatOpenAI(
+            model=settings.llm_model_name,
+            temperature=settings.llm_temperature
+        )
+        prompt_manager = PromptManager(template_string=template_str)
+        
+        weather_service = WeatherService(api_key=settings.stormglass_api_key)
+        llm_service = LLMService(client=llm_client, prompt_manager=prompt_manager)
+        
+        report_generator = ReportGenerator(
+            weather_service=weather_service,
+            llm_service=llm_service,
+            email_template_path=settings.email_template_path
+        )
+        
+        mail_service = MailchimpService(
+            api_key=settings.mailchimp_api_key,
+            server_prefix=settings.mailchimp_server_prefix,
+            public_id=settings.mailchimp_public_id
+        )
 
-        # Instanciar serviços
-        weather_service = WeatherService(stormglass_key)
-        llm_service = LLMService()
-        mail_service = MailchimpService(mailchimp_key, server_prefix, mailchimp_public_id)
+        # 2. Execução da Lógica Principal
+        with settings.surf_spots_path.open('r', encoding='utf-8') as f:
+            surf_spots = json.load(f)
 
-        # Lista de locais (fácil de expandir)
-        database_path = Path("database/surf_spots.json")
-        surf_spots = load_spots_from_json(database_path)
-
+        print(f"Iniciando processo para {len(surf_spots)} pico(s) de surf...")
         for spot in surf_spots:
-            final_html = generate_forecast_report_for_spot(
+            print(f"-> Gerando relatório para {spot['name']}...")
+            final_html_content = report_generator.generate_for_spot(
                 spot_name=spot["name"],
                 latitude=spot["lat"],
-                longitude=spot["lon"],
-                template_path=template_path,
-                llm_service=llm_service,
-                weather_service=weather_service
+                longitude=spot["lon"]
             )
-
-            mail_service.create_and_send_campaign(final_html)
+            
+            print(f"-> Enviando campanha por e-mail para {spot['name']}...")
+            mail_service.create_and_send_campaign(final_html_content)
+            print(f"✅ Campanha para {spot['name']} enviada com sucesso!")
 
     except Exception as e:
-        # Ideal: logar erro em arquivo ou sistema de monitoramento
-        print(f"[ERROR] Unexpected failure: {e}")
-
+        # Idealmente, usar um sistema de logging mais robusto
+        print(f"[ERRO FATAL] A aplicação falhou: {e}")
 
 if __name__ == "__main__":
     main()

@@ -17,21 +17,6 @@ class WeatherService:
 
     def fetch_weather_data(self, lat: float, lng: float) -> Dict[str, Any]:
 
-        """ 
-            Search for weather data at the specified coordinates
-
-            Args:
-                lat (float): Latitude
-                lng (float): Longitude
-            
-            Returns:
-                Dict[str, Any]: Meteorological data from API
-            
-            Raises:
-                WeatherAPIError: Error on API request
-                
-        """
-
         try:
             # config dates to Brasilia timezone
             start_time, end_time = self._get_brasilia_time_range()
@@ -60,13 +45,6 @@ class WeatherService:
     
     def _get_brasilia_time_range(self) -> tuple:
 
-        """
-            Calculates the time interval in Brasilia (6am to 7pm the next day).
-            
-            Returns:
-                tuple: (start_time, end_time) in UTC timestamp
-        """
-
         tomorrow = tomorrow = arrow.now(self.timezone).shift(days=+1).floor('day')
 
         # Brasília is -3h from UTC, adjust date to receive infos from 06h to 19h
@@ -79,18 +57,7 @@ class WeatherService:
         )
 
     def _build_request_params(self, lat: float, lng: float, start_time: float, end_time: float) -> Dict[str, Any]:
-        """
-        Build request params.
-        
-        Args:
-            lat (float): Latitude
-            lng (float): Longitude
-            start_time (float): initial timestamp
-            end_time (float): final timestamp
-            
-        Returns:
-            Dict[str, Any]: Request params
-        """
+
         return {
             'lat': lat,
             'lng': lng,
