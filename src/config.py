@@ -24,7 +24,7 @@ class Settings:
 
     # Mailchimp
     mailchimp_public_id: str = get_env('MAILCHIMP_PUBLIC_ID')
-    mailchimp_server_prefix: str = "us9" # Pode ser movido para .env
+    mailchimp_server_prefix: str = "us10" # Pode ser movido para .env
 
     # LLM
     llm_model_name: str = 'gpt-4'

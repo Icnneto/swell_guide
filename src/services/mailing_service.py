@@ -35,7 +35,7 @@ class MailchimpService:
                 "subject_line": "🌊 Seu guia de surf chegou!",
                 "title": "Swell Guide - Boletim Diário",
                 "from_name": "Swell Guide",
-                "reply_to": "israelnetonunes@gmail.com",
+                "reply_to": "swellguide@swellguide.com.br",
             }
         }
         response = self._handle_request("POST", url, json=payload)
