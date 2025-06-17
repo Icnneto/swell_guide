@@ -4,20 +4,50 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="x-apple-disable-message-reformatting" />
     <title>Swell Guide - Previsão</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap"
-        rel="stylesheet">
+    <!--[if mso]>    <noscript>        <xml>            <o:OfficeDocumentSettings>                <o:PixelsPerInch>96</o:PixelsPerInch>            </o:OfficeDocumentSettings>        </xml>    </noscript>    <![endif]-->
     <style>
+        /* Reset para clientes de email */
+        body,
+        table,
+        td,
+        p,
+        a,
+        li,
+        blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        /* Estilos base */
         body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Kantumruy Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background-color: #FAFAFA;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: Arial, sans-serif;
+            background-color: #FAFAFA !important;
             color: #595959;
             line-height: 1.6;
+            width: 100% !important;
+            height: 100% !important;
         }
 
         table {
@@ -31,145 +61,219 @@
             vertical-align: top;
         }
 
-        div {
+        /* Container principal */
+        .email-container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
             border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        header {
-            color: #042940;
+        /* Header */
+        .header {
+            background-color: #ffffff;
             padding: 40px 30px;
             text-align: center;
-            position: relative;
             border-bottom: 2px solid #e2e8f0;
         }
 
-        header .logo {
-            display: flexbox;
+        .logo {
             text-align: center;
+            margin-bottom: 12px;
         }
 
-        header .logo img {
-            height: 5rem;
+        .logo img {
+            height: 80px;
             width: auto;
-
+            display: block;
+            margin: 0 auto;
         }
 
-        header h1 {
-            margin: 0 0 8px 0;
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #042940;
-        }
-
-        header p {
+        .header-subtitle {
             margin: 0;
-            font-size: 16px;
-            text-align: center;
-            opacity: 0.9;
+            font-size: 14px;
+            color: #8AB0BF;
             font-weight: 300;
-            color: #042940;
+            text-align: center;
         }
 
-        main {
+        /* Main content */
+        .main-content {
             padding: 40px 30px;
+            background-color: #ffffff;
         }
 
-        h2 {
+        /* Títulos */
+        .main-title {
             color: #011826;
-            font-size: 24px;
-            font-weight: 800;
-            margin: 0 0 20px 0;
-            text-align: left;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(89, 89, 89, 0.2);
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 24px 0;
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #3E6E8C;
         }
 
-        h3 {
+        .section-title {
             color: #011826;
-            font-size: 18px;
-            font-weight: 700;
-            margin: 30px 0 15px 0;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 32px 0 16px 0;
+            padding: 16px 0 16px 50px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #3E6E8C;
             position: relative;
-            padding-bottom: 4px;
-            text-align: left;
         }
 
-        h3::after {
-            content: "";
+        /* Ícones para seções */
+        .section-wind .section-title::before {
+            content: "🌬️";
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background-color: #3E6E8C;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
         }
 
-        p {
+        .section-waves .section-title::before {
+            content: "🌊";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .section-conditions .section-title::before {
+            content: "📊";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        .section-recommendations .section-title::before {
+            content: "💡";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+        }
+
+        /* Parágrafo principal */
+        .main-info {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 0 24px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .main-info .info-label {
+            color: #011826;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+
+        /* Parágrafos */
+        .text-content {
             color: #595959;
             margin: 0 0 16px 0;
             font-size: 15px;
-            font-weight: 400;
+            line-height: 1.7;
             text-align: justify;
         }
 
-        strong {
+        .text-content strong {
             color: #011826;
-            font-weight: 700;
+            font-weight: bold;
         }
 
-        ul {
-            margin: 0 0 20px 0;
-            padding: 0 0 0 20px;
-            list-style: none;
+        /* Listas */
+        .content-list {
+            margin: 0 0 24px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
 
-        li {
-            position: relative;
-            margin-bottom: 16px;
-            padding: 0 0 0 14px;
+        .list-item {
+            margin-bottom: 12px;
+            padding: 12px 0 12px 24px;
             font-size: 15px;
             color: #595959;
-            text-align: justify;
+            background-color: #fafbfc;
+            border-radius: 8px;
+            border-left: 3px solid #3E6E8C;
+            position: relative;
         }
 
-        li::before {
-            content: ">";
+        .list-item::before {
+            content: "▶";
             position: absolute;
-            left: 0;
-            top: 0;
+            left: 8px;
+            top: 12px;
             color: #3E6E8C;
             font-size: 12px;
             font-weight: bold;
         }
 
-        hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, #595959 20%, #595959 50%, #595959 80%, transparent 100%);
-            margin: 30px 0;
+        .list-item:last-child {
+            margin-bottom: 0;
         }
 
+        /* Separador */
+        .separator {
+            height: 2px;
+            background-color: #e2e8f0;
+            margin: 32px 0;
+            border-radius: 1px;
+        }
+
+        /* Blockquote */
         blockquote {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: none;
-            border-left: 4px solid #3E6E8C;
-            border-radius: 0 8px 8px 0;
+            background-color: #EBEFF2;
+            border-left: 4px solid #042940;
+            border-radius: 0 12px 12px 0;
             padding: 20px 24px;
-            margin: 25px 0;
+            margin: 24px 0;
+            position: relative;
+            font-style: italic;
+        }
+
+        blockquote p {
+            margin: 0;
+            color: #595959;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Alert/Warning */
+        .alert-box {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin: 24px 0;
             position: relative;
         }
 
-        blockquote::before {
-            content: ">";
+        .alert-box::before {
+            content: "⚠️";
             position: absolute;
             top: -8px;
             left: -8px;
-            background-color: #042940;
+            background-color: #f59e0b;
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -177,17 +281,19 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            border: 2px solid #ffffff;
         }
 
-        blockquote p {
+        .alert-content {
             margin: 0;
-            color: #011826;
-            font-weight: 600;
+            color: #92400e;
+            font-weight: bold;
             font-style: italic;
-            text-align: justify;
+            font-size: 15px;
         }
 
-        footer {
+        /* Footer */
+        .footer {
             background-color: #f8fafc;
             padding: 30px;
             text-align: left;
@@ -196,70 +302,84 @@
             border-top: 1px solid #e2e8f0;
         }
 
-        footer strong {
+        .footer strong {
             color: #042940;
-            font-weight: 700;
+            font-weight: bold;
         }
 
-        em {
+        .footer em {
             color: #94a3b8;
             font-style: italic;
         }
 
-        /* Responsivo para email */
+        /* Media queries para mobile */
         @media only screen and (max-width: 600px) {
-            div {
-                border-radius: 0;
-                margin: 0;
+            .email-container {
+                border-radius: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
             }
 
-            header {
-                padding: 30px 20px;
+            .header {
+                padding: 30px 20px !important;
             }
 
-            header h1 {
-                font-size: 28px;
+            .main-content {
+                padding: 30px 20px !important;
             }
 
-            main {
-                padding: 30px 20px;
+            .main-title {
+                font-size: 24px !important;
             }
 
-            h2 {
-                font-size: 22px;
+            .section-title {
+                font-size: 18px !important;
+                padding: 14px 0 14px 46px !important;
             }
 
-            li {
-                padding: 14px 16px;
+            .footer {
+                padding: 25px 20px !important;
             }
 
-            footer {
-                padding: 25px 20px;
+            .logo img {
+                height: 70px !important;
             }
+        }
+
+        /* Fallbacks para clientes antigos */
+        .fallback-bg {
+            background-color: #f8fafc;
+        }
+
+        .fallback-border {
+            border: 1px solid #e2e8f0;
         }
     </style>
 </head>
 
 <body>
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"
+        style="background-color: #FFFFFF;">
         <tr>
             <td align="center" style="padding: 20px 0;">
-                <div>
-                    <header>
-                        <div class="logo">
-                            <img src="https://res.cloudinary.com/dy80sqiba/image/upload/v1749158577/logo_4x_d4m1bv.png"
-                                alt="Swell Guide Logo" />
-                        </div>
-                        <p>Resumo inteligente e diário da previsão de surf</p>
-                    </header>
-                    <main>
-                       {{content}}
-                    </main>
-                    <footer>
-                        Enviado por <strong>Swell Guide</strong> • Florianópolis, SC<br />
-                        <em>Boas ondas e bons ventos!</em>
-                    </footer>
-                </div>
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="email-container"
+                    style="max-width: 600px;"> <!-- Header -->
+                    <tr>
+                        <td class="header">
+                            <div class="logo"> <img
+                                    src="https://res.cloudinary.com/dy80sqiba/image/upload/v1749158577/logo_4x_d4m1bv.png"
+                                    alt="Swell Guide Logo" /> </div>
+                            <p class="header-subtitle">Resumo inteligente e diário da previsão de surf</p>
+                        </td>
+                    </tr> <!-- Main Content -->
+                    <tr>
+                        <td class="main-content"> {{content}} </td>
+                    </tr> <!-- Footer -->
+                    <tr>
+                        <td class="footer"> Enviado por <strong>Swell Guide</strong> • Florianópolis, SC<br /> <em>Boas
+                                ondas e bons ventos!</em> </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
