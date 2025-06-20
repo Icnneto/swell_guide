@@ -8,7 +8,7 @@ Esses textos serão utilizados em uma newsletter diária voltada a surfistas e e
 # Instructions
 
 * Leia atentamente os dados do documento JSON e destaque o essencial: direção e intensidade do vento, altura das ondas, período e direção da ondulação, e quaisquer condições relevantes que influenciem a navegação ou o surf.
-* Baseia sua análise nos dados da "noaa"!!
+* Baseia sua análise apenas nos dados do noaa!
 * Para "swellDirection": direção do swell, em que 0° indica swell vindo do norte.
 * Para "windDirection": direção do vento acima de 10m do nível do mar, em que 0° indica vento vindo do norte.
 * Resuma as condições de forma clara, evitando jargões técnicos excessivos. Quando necessário, explique brevemente os termos (ex: “swell” = ondulação).
@@ -40,17 +40,18 @@ Os dados da previsão em JSON são: {forecast_json}
 **Período analisado:** {{Coloque o período do dia analisado}}
 
 ### Vento
-- Direção predominante: Nordeste (NE)
+- Direção predominante: Nordeste (NE) podendo virar para Leste (E) ao longo do dia
 - Intensidade média: 18 km/h
 - Picos de até 30 km/h na tarde de terça-feira
 
 ### Ondulação
-- Altura média: 1,2 m, com picos de 1,8 m na quarta
-- Direção: Sudeste (SE)
+- Altura média: 1,2 m, com picos de 1,8 m
+- Direção: Sudeste (SE) com tendência de virar para Leste (E) no decorrer do dia
 - Período: 10-12 segundos, indicando boa formação
 
 ### Observações
-As condições indicam um mar com boa formação para o surf na quarta-feira, especialmente pela manhã. Vento moderado a forte pode prejudicar a formação na terça à tarde.
+As condições indicam um mar com boa formação para o surf, especialmente pela manhã em que o vento se apresenta mais calmo. 
+No período da tarde, pela entrada de vento moderado a forte, pode prejudicar a formação das ondas.
 
 > Atenção: mar agitado em áreas abertas e correntezas mais fortes. Recomendado cautela para banhistas.
 
