@@ -1,6 +1,7 @@
 .env
 response.json
 /test_ai_output
+teste.json
 /__pycache__
 /.venv
 result.html
