@@ -2,6 +2,10 @@
   {
     "name": "Florianópolis, SC - Brasil",
     "lat": -27.593500,
-    "lon": -48.558540
+    "lon": -48.558540,
+    "tags": {
+      "local": "Florianópolis",
+      "status": "Cadastrado"
+    }
   }
 ]

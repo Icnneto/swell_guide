@@ -42,7 +42,7 @@ class MailchimpService:
                     error_message += f" | Response Body: {e.response.text}"
             raise MailchimpAPIError(error_message) from e
         
-    def get_tags_id(self):
+    def get_tags_id(self, local: str, status: str):
         url = f"{self.base_url}/lists/{self.public_id}/segments?type=static"
         response = self._handle_request("GET", url)
 
@@ -50,16 +50,14 @@ class MailchimpService:
         segments_list = response.json().get("segments")
         tags_map = {segment["name"]: segment["id"] for segment in segments_list}
 
-        tag_id_florianopolis = tags_map["Florianópolis"]
-        tag_id_cadastrado = tags_map["Cadastrado"]
+        tag_id_local = tags_map[local]
+        tag_id_status = tags_map[status]
 
-        return [tag_id_florianopolis, tag_id_cadastrado]
+        return [tag_id_local, tag_id_status]
        
-    def create_campaign(self) -> str:
-        # Campanha que envia apenas para quem está com as tags "Florianópolis" e "Cadastrado"
-        tags = self.get_tags_id()
-        tag_id_florianopolis = tags[0]
-        tag_id_cadastrado = tags[1]
+    def create_campaign(self, tags: dict) -> str:
+        tag_id_local = tags[0]
+        tag_id_status = tags[1]
 
         url = f"{self.base_url}/campaigns"
         payload = {
@@ -73,13 +71,13 @@ class MailchimpService:
                                 "condition_type": "StaticSegment",
                                 "field": "static_segment",
                                 "op": "static_is",
-                                "value": tag_id_florianopolis,   
+                                "value": tag_id_local,   
                             },
                             {
                                 "condition_type": "StaticSegment",
                                 "field": "static_segment",
                                 "op": "static_is",
-                                "value": tag_id_cadastrado,   
+                                "value": tag_id_status,   
                             }
                         ]
                 }
@@ -105,9 +103,10 @@ class MailchimpService:
         if response.status_code != 204:
             raise MailchimpServiceError(f"Unexpected status code on send: {response.status_code} - {response.text}")
 
-    def create_and_send_campaign(self, html_content: str):
+    def create_and_send_campaign(self, html_content: str, tag_local: str, tag_status: str):
         try:
-            campaign_id = self.create_campaign()
+            tags = self.get_tags_id(tag_local, tag_status)
+            campaign_id = self.create_campaign(tags)
             self.set_campaign_content(campaign_id, html_content)
             self.send_campaign(campaign_id)
         except Exception as e:

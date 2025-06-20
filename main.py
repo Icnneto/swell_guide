@@ -1,14 +1,13 @@
 import json
 from langchain_openai import ChatOpenAI
 
-# Importações refatoradas
 from src.config import settings
 from src.llm.llm_service import LLMService
 from src.llm.prompt_manager import PromptManager
 from src.services.weather_service import WeatherService
 from src.services.mailing_service import MailchimpService
 from src.use_cases.report_generator import ReportGenerator
-from templates.prompt_template import template_str # Importa a string diretamente
+from templates.prompt_template import template_str
 
 def main():
     try:
@@ -41,14 +40,18 @@ def main():
         print(f"Iniciando processo para {len(surf_spots)} pico(s) de surf...")
         for spot in surf_spots:
             print(f"-> Gerando relatório para {spot['name']}...")
+
             final_html_content = report_generator.generate_for_spot(
                 spot_name=spot["name"],
                 latitude=spot["lat"],
                 longitude=spot["lon"]
             )
+
+            tag_local=spot["tags"]["local"]
+            tag_status=spot["tags"]["status"]
             
             print(f"-> Enviando campanha por e-mail para {spot['name']}...")
-            mail_service.create_and_send_campaign(final_html_content)
+            mail_service.create_and_send_campaign(final_html_content, tag_local, tag_status)
             print(f"✅ Campanha para {spot['name']} enviada com sucesso!")
 
     except Exception as e:
