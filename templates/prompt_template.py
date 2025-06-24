@@ -20,6 +20,8 @@ Esses textos serão utilizados em uma newsletter diária voltada a surfistas e e
 * Indique, com base nas condições de vento e ondulação, qual o melhor período para praticar o surf
 * Sempre responda em português do Brasil, a menos que indicado o contrário.
 * Não exagere no uso de emojis ou ícones
+* Faça uma distinção clara entre o período da manhã e o período da tarde e seus respectivos comportamentos
+* Não seja ambíguo, lembre-se que sua função é ajudar o surfista a entender se deve ou não sair de casa para surfar
 
 O local da previsão é: {local}
 
@@ -40,23 +42,22 @@ Os dados da previsão em JSON são: {forecast_json}
 **Período analisado:** {{Coloque o período do dia analisado}}
 
 ### Vento
-- Direção predominante: Nordeste (NE) podendo virar para Leste (E) ao longo do dia
-- Intensidade média: 18 km/h
-- Picos de até 30 km/h na tarde de terça-feira
+- Direção predominante: No período da manhã, o vento vem predominantemente do Oeste. No período da tarde, a direção do vento muda para o Norte.
+- Intensidade média: A velocidade média do vento é de aproximadamente 2.5 km/h, com um aumento gradual ao longo do dia, chegando a 5.19 km/h no final da tarde
+- Picos de até 30 km/h durante a tarde
 
 ### Ondulação
-- Altura média: 1,2 m, com picos de 1,8 m
-- Direção: Sudeste (SE) com tendência de virar para Leste (E) no decorrer do dia
-- Período: 10-12 segundos, indicando boa formação
+- Altura média: A altura média das ondas é de aproximadamente 0.75 metros (meio metrão), com um aumento gradual ao longo do dia, chegando a 0.87 metros no final da tarde
+- Direção: A ondulação vem predominantemente do Sudeste durante a manhã, mudando para o Sul no período da tarde
+- Período: O período das ondas varia entre 11 e 12 segundos, indicando uma boa formação de ondas
 
 ### Observações
-As condições indicam um mar com boa formação para o surf, especialmente pela manhã em que o vento se apresenta mais calmo. 
-No período da tarde, pela entrada de vento moderado a forte, pode prejudicar a formação das ondas.
+As condições indicam um mar com boa formação para o surf, especialmente pela manhã, quando o vento se apresenta mais calmo. No período da tarde, a entrada de vento moderado pode prejudicar a formação das ondas.
 
-> Atenção: mar agitado em áreas abertas e correntezas mais fortes. Recomendado cautela para banhistas.
+> Atenção: O mar estará um pouco agitado, principalmente no final da tarde. Recomenda-se cautela para banhistas e surfistas menos experientes
 
 ### sugestões
-Ótimo momento para quem quer praticar inciação ao surf, stand up paddle ou apenas curtir o mar. Quem gosta de observar o oceano terá um dia calmo, sem surpresas.
+Este é um bom momento para surfistas intermediários e avançados, devido à altura e à formação das ondas. Para os iniciantes, o período da manhã pode ser mais adequado, quando o vento está mais calmo. Para aqueles que gostam de observar o oceano, será um dia interessante, com mudanças visíveis nas condições do mar ao longo do dia.
 
 
 """
